@@ -1,0 +1,52 @@
+<% include includes/headerland.ejs %>
+
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+		      </button>
+
+		      <a class="navbar-brand" href="#">AutoProdaja</a>
+		    </div>
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		      	<li><a href="/signin">SignIn</a></li>
+		      	<li><a href="/signup">SignUp</a></li>
+		      </ul>
+		    </div>
+		  </div>
+		</nav>
+
+	 <div class="container">
+	 	<% if(success && success.length>0) { %>
+         <div class="alert alert-success" role="alert">
+             <%= success %>
+         </div>
+     <% } %>
+     <% if(error && error.length>0) { %>
+         <div class="alert alert-danger" role="alert">
+             <%= error %>
+         </div>
+          <% } %>
+    </div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div id="content">
+					<h1>AutoProdaja</h1>
+					<h3>Prijavi se ako si u potrazi za autom ili želiš prodati svoj!</h3>
+					<hr>
+					<a href="/carssale"><button class="btn btn-default btn-lg">Kreni!</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<% include includes/footerlanding.ejs %>

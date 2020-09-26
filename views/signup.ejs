@@ -1,0 +1,42 @@
+<% include includes/headersignup.ejs %>
+
+<div class="container" id="signup">
+    <div class="row">
+        <h1 style="text-align:center;">Registriraj se!</h1>
+        <div style="width: 30%; margin:20px auto;">
+            <form action="/signup" method="POST">
+                        <div class="form-group">
+                            <label>Ime</label>
+                            <input  class = "form-control" type="text" name="firstname" placeholder="ime">
+                        </div>
+
+                        <div class="form-group">
+                        <label>Prezime</label>
+                        <input type="text" class="form-control"  name="lastname"  placeholder="prezime">
+                        </div>
+
+                        <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Korisničko ime</label>
+                            <input  class = "form-control" type="text" name="username" placeholder="korisničko ime">
+                        </div>
+
+                        <div class="form-group">
+                        <label>Lozinka</label>
+                        <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="lozinka">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-default btn-block">Registriracija!</button>
+                        </div>
+            </form>
+            <p>Prijavite se <a  href="/signin">Log In</a></p>
+        </div>
+    </div>
+</div>
+
+<% include includes/footer.ejs %>

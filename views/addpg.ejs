@@ -1,0 +1,88 @@
+<% include includes/header.ejs %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align:center;">Dodaj oglas auta!</h1>
+        <div style="width: 30%; margin:20px auto;">
+            <form action="/carssale" method="POST" id="add" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input  class = "form-control" type="text" name="carname" placeholder="Ime auta">
+                        </div>
+                        <div class="form-group">
+                            <input  class = "form-control" type="number" name="carprice" placeholder="Cijena auta">
+                        </div>
+                        <div class="form-group">
+                            <input  class = "form-control" type="number" min="000000000" max="9999999999"  name="carcontact" placeholder="Kontakt telefon">
+                        </div>
+                        <div class="form-group">
+                            <input  class = "form-control" type="number" min="000000000" max="9999999999" name="km" placeholder="Pređeni kilometri">
+                        </div>
+                        <div class="form-group">
+                            <input  class = "form-control" type="text" min="1900" max="2020" name="yearmanufacture"  placeholder="Godina proizvodnje, npr 2019" >
+                        </div>
+                        <div class="form-group">
+                            <label for="carbrand">Brend automobila:</label>
+                            <select id="carbrand" name="carbrand">
+                              <option value="">svi brendovi</option>
+                              <option value="audi">audi</option>
+                              <option value="bmw">audi</option>
+                              <option value="ford">ford</option>
+                              <option value="fiat">fiat</option>
+                              <option value="honda">honda</option>
+                              <option value="jeep">jeep</option>
+                              <option value="kia">kia</option>
+                              <option value="land rover">land rover</option>
+                              <option value="mazda">mazda</option>
+                              <option value="mercedes">mercedes</option>
+                              <option value="nissan">nissan</option>
+                              <option value="opel">opel</option>
+                              <option value="peugeot">peugeot</option>
+                              <option value="porche">porche</option>
+                              <option value="seat">seat</option>
+                              <option value="skoda">skoda</option>
+                              <option value="toyota">toyota</option>
+                              <option value="volkswagen">volkswagen</option>
+                              <option value="volvo">volvo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="engine">Motor:</label>
+                            <select id="engine" name="engine">
+                              <option value="">sve vrste</option>
+                              <option value="diesel">diesel</option>
+                              <option value="benzin">benzin</option>
+                              <option value="hybrid">hybrid</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Boja:</label>
+                            <select id="color" name="color">
+                              <option value="crvena">crvena</option>
+                              <option value="siva">siva</option>
+                              <option value="crna">crna</option>
+                              <option value="plava">plava</option>
+                              <option value="bijela">bijela</option>
+                            </select>
+                        </div>
+                         <div class="form-group">
+                         <label for="image">Dodaj sliku</label>
+                            <input name="carimage" type="file" id="image" accept="image/*" required>
+                            <p class="help-block">format : jpg, png</p>
+                        </div>
+
+                        <div class="form-group">
+                            <input  class = "form-control" type="text" name="location" placeholder="Lokacija">
+                        </div>
+
+                        <div class="form-group">
+                         <textarea class="form-control" minlength="50" wrap  rows="2" cols="90" type="text" name="descriptionform" placeholder="Opis (min 50 znakova)" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                          <button class="btn btn-lg btn-default btn-block">Objavi!</button>
+                        </div>
+            </form>
+            <a  href="/carssale">Vrati se nazad</a>
+        </div>
+    </div>
+</div>
+<% include includes/footer.ejs %>

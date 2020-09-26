@@ -1,0 +1,38 @@
+<% include includes/headersignup.ejs %>
+
+<div class="container" id="signup">
+    <div class="row">
+        <h1 style="text-align:center;">Ažuriraj podatke o korisniku:</h1>
+        <div style="width: 30%; margin:20px auto;">
+            <form action="/carssale/editUser/<%= userinfo._id %>?_method=PUT" method="POST" id="changeuser" >
+                        <div class="form-group">
+                            <label>Ime</label>
+                            <input  class = "form-control" type="text" name="firstname" value="<%= userinfo.firstname %>">
+                        </div>
+
+                        <div class="form-group">
+                        <label>Prezime</label>
+                        <input type="text" class="form-control"  name="lastname"  value="<%= userinfo.lastname %>">
+                        </div>
+
+                        <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" value="<%= userinfo.email %>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Korisničko ime</label>
+                            <input  class = "form-control" type="text" name="username"  value="<%= userinfo.username %>">
+                        </div>
+
+
+                        <div class="form-group">
+                            <button class="btn btn-lg btn-default btn-block">Ažuriraj!</button>
+                        </div>
+            </form>
+            <a  href="/admin">Nazad</a>
+        </div>
+    </div>
+</div>
+
+<% include includes/footer.ejs %>
