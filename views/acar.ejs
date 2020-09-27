@@ -69,7 +69,7 @@
                      <p>
                         <%= comment.text %>
 
-                            <% if((curruser  && comment.author.id.equals(curruser._id) || (curruser.role=="admin"))){ %>
+                             <% if((curruser  && comment.author.id.equals(curruser._id) || ( curruser  && curruser.role=="admin"))){ %>
                          <form id = "formdelete" action="/carssale/<%=carinfo._id%>/comment/<%=comment._id%>?_method=DELETE" method="POST">
                                  <button style="color:#202020;" class = "btn btn-danger btn-lg">Obriši</button>
                              </form>
