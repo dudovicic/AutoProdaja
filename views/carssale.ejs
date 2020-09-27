@@ -96,12 +96,143 @@
                        </div>
                      </div>
 
-
                       <% } %>
 
                     <% }); %>
            </div>
-        </div>
+
+
+                <% if( (curruser) ){ %>
+                      <div class="thumbnail"">
+
+                  <script>
+                 function httpGet(Url){
+                   var xmlHttp = new XMLHttpRequest();
+                   xmlHttp.open("GET", Url, false);
+                   xmlHttp.send(null);
+                   return xmlHttp.responseText;
+                 }
+
+                 window.onload=function(){
+                   var aData = JSON.parse(httpGet('http://localhost:3000/test'));
+
+                   var seriesData = {
+                     price: [],
+                     km: [],
+                     yearmanufacture: [],
+
+                   };
+
+                   for(var n = 0; n < aData.length; n++){
+                     seriesData['price'].push(aData[n]['price']);
+                     seriesData['km'].push(aData[n]['km']);
+                     seriesData['yearmanufacture'].push(aData[n]['yearmanufacture']);
+                   }
+
+
+                   zingchart.render({
+                     id:"myChart",
+                     width:"100%",
+                     height:400,
+                     data:{
+                       "type":"bar",
+                "plotarea":{  "marginLeft":100, "marginRight":100},
+
+                "legend": {
+                  "layout": "x3",
+                  "overflow": "page",
+                  "alpha": 0.05,
+                  "shadow": false,
+                  "align": "center",
+                  "adjust-layout": true,
+                  "marker": {
+                    "type": "circle",
+                    "border-color": "none",
+                    "size": "10px"
+                  },
+                "border-width": 0,
+                "maxItems": 3,
+                "toggle-action": "hide",
+                "pageOn": {
+                "backgroundColor": "#000",
+                "size": "10px",
+                "alpha": 0.65},
+                "pageOff": {
+                "backgroundColor": "#7E7E7E",
+                "size": "10px",
+                "alpha": 0.65
+                },
+                "pageStatus": {
+                "color": "black"
+                }
+                },
+                //"scroll-y-2": {},
+                "scroll-x": {},
+                "scale-y": {"label": {
+                            "text": "Iznos cijene i pređenih kilometara",
+                            "font-family": "arial",
+                            "bold": true,
+                            "font-size": "14px",
+                            "font-color": "#7E7E7E",
+                          } //, "zooming": true
+                        },
+
+                          'scale-y-2': {
+                            "label": {
+                                        "text": "Godina proizvodnje",
+                                        "font-family": "arial",
+                                        "bold": true,
+                                        "font-size": "14px",
+                                        "font-color": "#7E7E7E",
+                                      }, "zooming": true
+                          },
+
+                                  "scaleX": {"label": {
+                                              "text": "ID oglasa",
+                                              "font-family": "arial",
+                                              "bold": true,
+                                              "font-size": "14px",
+                                              "font-color": "#7E7E7E",
+
+                                            }, "zooming": true, "min-value":1},
+                       "series":[
+                         {
+                           "values":seriesData['price'],
+                           "text": 'Cijena (kn)',
+                           "scales": "scale-x,scale-y"
+                         },
+                         {
+                           "values":seriesData['km'],
+                           "text": 'Pređeni kilometri (km)',
+                           "scales": "scale-x,scale-y"
+                         },
+                         {
+                           "values":seriesData['yearmanufacture'],
+                           "text": 'Godina proizvodnje (godina)',
+                           "scales": "scale-x,scale-y-2"
+                         }
+                       ]
+                     }
+
+                   });
+                 };
+                 </script>
+
+                          <h3 style=" margin-top: 100px;">Prikaz odnosa cijene, pređenih kilometara i godine proizvodnje automobila prema pojedinom oglasu</h3>
+                              <div id="myChart"></div>
+                              <h3>ID oglasa</h3>
+
+                              <ol>
+                                <% pginfo.forEach(item => { %>
+                                <li><%= `Ime auta: ${item.carbrand} , Cijena auta: ${item.price}, Pređeni kilometri: ${item.km}, Godina proizvodnje: ${item.yearmanufacture}
+                                  , Vlasnik oglasa: ${item.owner.firstname}, Status: ${item.status}` %></li>
+                                <% }); %>
+                              </ol>
+                </div>
+
+                   </div>
+                   <% } %>
+
 
 
 
