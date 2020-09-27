@@ -49,12 +49,12 @@ app.use(commentroutes);
 app.use(carssalesroutes);
 app.use(adminroutes);
 
-app.get('/test', function (req, res) {
-	Cars.find(function(err, records){
-		aData = records;
-		res.send(aData);
-	});
-});
+ app.get('/test', function (req, res) {
+  	Cars.find(function(err, records){
+	 	aData = records;
+	 	res.send(aData);
+	   });
+   });
 
 
 app.listen(3000, () => {
