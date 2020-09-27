@@ -16,7 +16,7 @@
             <p>Ime automobila: </p> <input class="form-control mr-sm-2" type="text" name="dsearch" placeholder="Search">
             <p>Max cijena: <input class="form-control mr-sm-2" type="number" name="pricee" placeholder="price" value=1000000 max=1000000 min=0> </p>
             <p>Lokacija: </p> <input class="form-control mr-sm-2" type="text" name="dlocation" placeholder="lokacija">
-            <p>Max pređeni kilometri: <input class="form-control mr-sm-2" type="number" name="km" placeholder="km" value=1000000 max=1000000 min=0> </p>
+            <p>Max prijeđeni kilometri: <input class="form-control mr-sm-2" type="number" name="km" placeholder="km" value=1000000 max=1000000 min=0> </p>
             <p>Godina proizvodnje: <input class="form-control mr-sm-2" type="text" name="yearmanufacture" placeholder="godina proizvodnje, npr 2019" value='' max=2020 min=1900> </p>
             <div class="form-group">
                 <label for="carbrand">Brend automobila:</label>
@@ -168,7 +168,7 @@
                  //"scroll-y-2": {},
                  "scroll-x": {},
                  "scale-y": {"label": {
-                             "text": "Iznos cijene i pređenih kilometara",
+                             "text": "Iznos cijene i prijeđenih kilometara",
                              "font-family": "arial",
                              "bold": true,
                              "font-size": "14px",
@@ -202,7 +202,7 @@
                           },
                           {
                             "values":seriesData['km'],
-                            "text": 'Pređeni kilometri (km)',
+                            "text": 'Prijeđeni kilometri (km)',
                             "scales": "scale-x,scale-y"
                           },
                           {
@@ -217,13 +217,13 @@
                   };
                   </script>
 
-                           <h3 style=" margin-top: 100px;">Prikaz odnosa cijene, pređenih kilometara i godine proizvodnje automobila prema pojedinom oglasu</h3>
+                           <h3 style=" margin-top: 100px;">Prikaz odnosa cijene, prijeđenih kilometara i godine proizvodnje automobila prema pojedinom oglasu</h3>
                                <div id="myChart"></div>
                                <h3>ID oglasa</h3>
 
                                <ol>
                                  <% pginfo.forEach(item => { %>
-                                 <li><%= `Ime auta: ${item.carbrand} , Cijena auta: ${item.price}, Pređeni kilometri: ${item.km}, Godina proizvodnje: ${item.yearmanufacture}
+                                 <li><%= `Ime auta: ${item.carbrand} , Cijena auta: ${item.price}, Prijeđeni kilometri: ${item.km}, Godina proizvodnje: ${item.yearmanufacture}
                                    , Vlasnik oglasa: ${item.owner.firstname}, Status: ${item.status}` %></li>
                                  <% }); %>
                                </ol>
