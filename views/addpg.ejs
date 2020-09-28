@@ -14,17 +14,17 @@
                             <input  class = "form-control" type="number" min="000000000" max="9999999999"  name="carcontact" placeholder="Kontakt telefon">
                         </div>
                         <div class="form-group">
-                            <input  class = "form-control" type="number" min="000000000" max="9999999999" name="km" placeholder="Pređeni kilometri">
+                            <input  class = "form-control" type="number" min="000000000" max="9999999999" name="km" placeholder="Prijeđeni kilometri">
                         </div>
                         <div class="form-group">
                             <input  class = "form-control" type="text" min="1900" max="2020" name="yearmanufacture"  placeholder="Godina proizvodnje, npr 2019" >
                         </div>
-                        <div class="form-group">
-                            <label for="carbrand">Brend automobila:</label>
-                            <select id="carbrand" name="carbrand">
+                        <div class="form-group" >
+                            <label for="carbrand">Marka automobila:</label>
+                            <select id="carbrand" name="carbrand" >
                               <option value="">svi brendovi</option>
                               <option value="audi">audi</option>
-                              <option value="bmw">audi</option>
+                              <option value="bmw">bmw</option>
                               <option value="ford">ford</option>
                               <option value="fiat">fiat</option>
                               <option value="honda">honda</option>
@@ -44,6 +44,16 @@
                               <option value="volvo">volvo</option>
                             </select>
                         </div>
+
+
+                        <div class="form-group">
+                            <select class="form-control" type="text" name="model" id="selectNumber" placeholder="model">
+                                <option id="defaultmodel">Odaberi model</option>
+                            </select>
+                        </div>
+
+
+
                         <div class="form-group">
                             <label for="engine">Motor:</label>
                             <select id="engine" name="engine">
