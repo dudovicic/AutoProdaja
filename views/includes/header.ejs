@@ -4,59 +4,62 @@
         <title>AutoProdaja</title>
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+" crossorigin="anonymous">
        <link rel="stylesheet" href="/stylesheets/app.css">
+
        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
        <!-- ZingChart CDN script -->
   <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
 
-          <script>
-            $(document).ready(function(){
-                $("select#carbrand").change(function(){
-                    var options = []
-                    var selectedBrand = $(this).children("option:selected").val();
-                    //alert("You have selected the country - " + selectedBrand)
-              var select = document.getElementById("selectNumber");
+  <script>
+$(document).ready(function(){
+  $("select#carbrand").change(function(){
+      var options = []
+      var selectedBrand = $(this).children("option:selected").val();
+      //alert("You have selected the country - " + selectedBrand)
+var select = document.getElementById("selectNumber");
 
-                options = selectedBrand == "audi" ?  ["a1", "a2", "a3", "q2", "Q3", "ostali"]
-                       : selectedBrand == "bmw"  ? ["serija 1", "serija 2", "serija 3", "serija 4", "serija 5", "serija 6", "ostali"]
-                       : selectedBrand == "ford"  ? ["escort", "explorer", "fiesta", "focus", "mondeo", "ostali"]
-                       : selectedBrand == "fiat"  ? ["Bravo", "punto", "linea", "panda", "tipo", "uno", "ostali"]
-                       : selectedBrand == "honda"  ? ["accord", "civic", "cr-v", "ostali"]
-                       : selectedBrand == "jeep"  ? ["cherokee", "commander", "compass", "grand cherokee", "renegade", "ostali"]
-                       : selectedBrand == "kia"  ? ["ceed", "pride", "rio", "shuma", "spectra", "sportage", "ostali"]
-                       : selectedBrand == "land rover"  ? ["defender", "discovery", "freelander", "range rover", "ostali"]
-                       : selectedBrand == "mazda"  ? ["2", "3", "6", "bt-50", "ostali"]
-                       : selectedBrand == "mercedes"  ? ["a-klasa", "b-klasa", "c-klasa", "e-klasa", "serija 100", "ostali"]
-                       : selectedBrand == "nissan"  ? ["350z", "juke", "micra", "navara", "qashqai", "ostali"]
-                       : selectedBrand == "opel"  ? ["ascona", "astra", "corsa", "insignia", "kadett", "vectra", "ostali"]
-                       : selectedBrand == "peugeot"  ? ["206", "207", "306", "406", "ostali"]
-                       : selectedBrand == "porche"  ? ["carrera", "cayenne", "cayman", "panamera", "ostali"]
-                       : selectedBrand == "seat"  ? ["altea", "cordoba", "ibiza", "leon", "ostali"]
-                       : selectedBrand == "skoda"  ? ["fabia", "felicia", "octavia", "superb", "ostali"]
-                       : selectedBrand == "volkswagen"  ? ["beetle", "golf I", "golf II", "golf III", "golf IV", "golf V", "ostali"]
-                       : selectedBrand == "toyota"  ?  ["auris", "avensis", "corolla", "yaris", "ostali"]
-                       : selectedBrand == "volvo"  ? ["s40", "s60", "s90", "v40", "v90", "ostali"]
-                       : defaultValue;
+  options = selectedBrand == "audi" ?  ["a1", "a2", "a3", "q2", "Q3", "ostali"]
+         : selectedBrand == "bmw"  ? ["serija 1", "serija 2", "serija 3", "serija 4", "serija 5", "serija 6", "ostali"]
+         : selectedBrand == "ford"  ? ["escort", "explorer", "fiesta", "focus", "mondeo", "ostali"]
+         : selectedBrand == "fiat"  ? ["Bravo", "punto", "linea", "panda", "tipo", "uno", "ostali"]
+         : selectedBrand == "honda"  ? ["accord", "civic", "cr-v", "ostali"]
+         : selectedBrand == "jeep"  ? ["cherokee", "commander", "compass", "grand cherokee", "renegade", "ostali"]
+         : selectedBrand == "kia"  ? ["ceed", "pride", "rio", "shuma", "spectra", "sportage", "ostali"]
+         : selectedBrand == "land rover"  ? ["defender", "discovery", "freelander", "range rover", "ostali"]
+         : selectedBrand == "mazda"  ? ["2", "3", "6", "bt-50", "ostali"]
+         : selectedBrand == "mercedes"  ? ["a-klasa", "b-klasa", "c-klasa", "e-klasa", "serija 100", "ostali"]
+         : selectedBrand == "nissan"  ? ["350z", "juke", "micra", "navara", "qashqai", "ostali"]
+         : selectedBrand == "opel"  ? ["ascona", "astra", "corsa", "insignia", "kadett", "vectra", "ostali"]
+         : selectedBrand == "peugeot"  ? ["206", "207", "306", "406", "ostali"]
+         : selectedBrand == "porche"  ? ["carrera", "cayenne", "cayman", "panamera", "ostali"]
+         : selectedBrand == "seat"  ? ["altea", "cordoba", "ibiza", "leon", "ostali"]
+         : selectedBrand == "skoda"  ? ["fabia", "felicia", "octavia", "superb", "ostali"]
+         : selectedBrand == "volkswagen"  ? ["beetle", "golf I", "golf II", "golf III", "golf IV", "golf V", "ostali"]
+         : selectedBrand == "toyota"  ?  ["auris", "avensis", "corolla", "yaris", "ostali"]
+         : selectedBrand == "volvo"  ? ["s40", "s60", "s90", "v40", "v90", "ostali"]
+         : defaultValue;
 
-                var selectedClassName = "." + selectedBrand;
-                $(select).find("option:not("+selectedClassName+"):not(#defaultmodel)").remove()
+  var selectedClassName = "." + selectedBrand;
+  $(select).find("option:not("+selectedClassName+"):not(#defaultmodel)").remove()
 
-                     for(var i = 0; i < options.length; i++) {
-                         var  opt = options[i];
-                         var el = document.createElement("option");
-                         el.textContent = opt;
-                         el.value = opt;
-                         el.classList.add(selectedBrand);
-                         select.appendChild(el);
-                     }
+       for(var i = 0; i < options.length; i++) {
+           var  opt = options[i];
+           var el = document.createElement("option");
+           el.textContent = opt;
+           el.value = opt;
+           el.classList.add(selectedBrand);
+           select.appendChild(el);
+       }
 
-                });
+  });
 
-            });
-          </script>
+});
+</script>
 
 
+
+       <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
     </head>
 

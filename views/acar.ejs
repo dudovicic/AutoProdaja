@@ -21,13 +21,17 @@
                            <li class="pull-right" position: relative;>Brend automobila: <%= carinfo.carbrand %></li>
                            </div>
                            <div>
-                          <li class="pull-right" position: relative;>Pređeni kilometri: <%= carinfo.km %></li>
+                          <li class="pull-right" position: relative;>Prijeđeni kilometri: <%= carinfo.km %></li>
                           </div>
                           <div>
                          <li class="pull-right" position: relative;>Motor: <%= carinfo.engine %></li>
                          </div>
+                         <div>
                         <li class="pull-right" position: relative;>Godina proizvodnje: <%= carinfo.yearmanufacture %></li>
-
+                        </div>
+                        <div>
+                       <li class="pull-right" position: relative;>Model: <%= carinfo.model %></li>
+                       </div>
                     </div>
 
                     <p style="word-wrap:break-word;"><%= carinfo.description %> </p>
@@ -69,7 +73,7 @@
                      <p>
                         <%= comment.text %>
 
-                            <% if((curruser  && comment.author.id.equals(curruser._id) || (curruser.role=="admin"))){ %>
+                             <% if((curruser  && comment.author.id.equals(curruser._id) || ( curruser  && curruser.role=="admin"))){ %>
                          <form id = "formdelete" action="/carssale/<%=carinfo._id%>/comment/<%=comment._id%>?_method=DELETE" method="POST">
                                  <button style="color:#202020;" class = "btn btn-danger btn-lg">Obriši</button>
                              </form>

@@ -24,8 +24,8 @@ var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 cloudinary.config({
   cloud_name: 'uniquecloudname',
-  api_key: 'xxx', //upiasti api_key
-  api_secret: 'xxx' //upisati api_secret
+  api_key: 'xxx',
+  api_secret: 'xxx'
 });
 
 
@@ -69,6 +69,9 @@ router.get("/search",function(req,res){
               ]},
               {"$or":[
               {km: {$lte : req.query.km }}
+              ]},
+              {"$or":[
+              { model: null }, { model:'' }, {model:{'$regex':req.query.model }}
               ]}
             ]}
             ,(err,data)=>{
@@ -116,7 +119,7 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
             var carbrand = req.body.carbrand;
             var location = req.body.location;
             var color = req.body.color;
-
+            var model = req.body.model;
             var owner={
                 id:req.user._id,
                 firstname:req.user.firstname
@@ -133,6 +136,7 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
                   carbrand:carbrand,
                   location:location,
                   color:color,
+                  model:model,
                   owner:owner
                 }
 
@@ -191,7 +195,8 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                           carbrand:req.body.carbrand,
                           location:req.body.location,
                           image:"https://res.cloudinary.com/uniquecloudname/image/upload/v1600866328/o9mt88uizdupqrl5swcb.jpg",
-                          description:req.body.descriptionform
+                          description:req.body.descriptionform,
+                          model:req.body.model
                       }
                       Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
                       {
@@ -219,7 +224,8 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                 carbrand:req.body.carbrand,
                 location:req.body.location,
                 image:result.secure_url,
-                description:req.body.descriptionform
+                description:req.body.descriptionform,
+                model:req.body.model
             }
             Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
             {

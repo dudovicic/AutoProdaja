@@ -1,303 +1,245 @@
-var express = require("express");
-
-var bodyParser = require("body-parser");
-
-var router   = express.Router();
-var Cars   = require("../models/cars");
-var Users = require("../models/users");
-var passport = require("passport");
-var multer = require("multer");
-var cloudinary = require('cloudinary');
-var Comments = require("../models/comments")
-var storage = multer.diskStorage({
-  filename: function(req, file, callback) {
-    callback(null, Date.now() + file.originalname);
-  }
-});
-var imageFilter = function (req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Učitaj sliku!'), false);
-    }
-    cb(null, true);
-};
-var upload = multer({ storage: storage, fileFilter: imageFilter})
-
-cloudinary.config({
-  cloud_name: 'uniquecloudname',
-  api_key: 'xxx',
-  api_secret: 'xxx'
-});
+<% include includes/header.ejs %>
 
 
+    <div class="container">
+        <header class="jumbotron">
+               <div class="container" id="jumbo">
+                <h1>AutoProdaja</h1>
+                <p>objavite oglas vašeg auta ili javite se na neki oglas!</p>
+                <p><a href="/carssale/addpg" class="btn btn-default btn-lg" type="button">Dodaj objavu</a></p>
+                </div>
+        </header>
 
-router.get("/profil",isLoggedIn,function(req,res){
-Cars.find({},function(err,pgcars){
-    if(err){
-    console.log("Error: ");
-    console.log(err);
-}
-else{
-    res.render("profil",{pginfo:pgcars, curruser:req.user});
-}
-});
+<% if( (!curruser)  || ( curruser && curruser.role=="basic") ){ %>
+        <div class="row">
+          <form class="col-xs-6" action="/search" method="get" >
+            <p>Ime automobila: </p> <input class="form-control mr-sm-2" type="text" name="dsearch" placeholder="Search">
+            <p>Max cijena: <input class="form-control mr-sm-2" type="number" name="pricee" placeholder="price" value=1000000 max=1000000 min=0> </p>
+            <p>Lokacija: </p> <input class="form-control mr-sm-2" type="text" name="dlocation" placeholder="lokacija">
+            <p>Max prijeđeni kilometri: <input class="form-control mr-sm-2" type="number" name="km" placeholder="km" value=1000000 max=1000000 min=0> </p>
+            <p>Godina proizvodnje: <input class="form-control mr-sm-2" type="text" name="yearmanufacture" placeholder="godina proizvodnje, npr 2019" value='' max=2020 min=1900> </p>
+            <div class="form-group">
+                <label for="carbrand">Brend automobila:</label>
+                <select id="carbrand" name="carbrand" >
+                  <option value="">svi brendovi</option>
+                  <option value="audi">audi</option>
+                  <option value="bmw">audi</option>
+                  <option value="ford">ford</option>
+                  <option value="fiat">fiat</option>
+                  <option value="honda">honda</option>
+                  <option value="jeep">jeep</option>
+                  <option value="kia">kia</option>
+                  <option value="land rover">land rover</option>
+                  <option value="mazda">mazda</option>
+                  <option value="mercedes">mercedes</option>
+                  <option value="nissan">nissan</option>
+                  <option value="opel">opel</option>
+                  <option value="peugeot">peugeot</option>
+                  <option value="porche">porche</option>
+                  <option value="seat">seat</option>
+                  <option value="skoda">skoda</option>
+                  <option value="toyota">toyota</option>
+                  <option value="volkswagen">volkswagen</option>
+                  <option value="volvo">volvo</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="engine">Motor:</label>
+                <select id="engine" name="engine">
+                  <option value="">sve vrste</option>
+                  <option value="diesel">diesel</option>
+                  <option value="benzin">benzin</option>
+                  <option value="hybrid">hybrid</option>
+                </select>
+            </div>
 
+            <div class="form-group">
+                <label for="color">Boja:</label>
+                <select id="color" name="color">
+                  <option value="">sve boje</option>
+                  <option value="crvena">crvena</option>
+                  <option value="siva">siva</option>
+                  <option value="crna">crna</option>
+                  <option value="plava">plava</option>
+                  <option value="bijela">bijela</option>
+                </select>
+            </div>
 
-});
+            <div class="form-group">
+                <select class="form-control" type="text" name="model" id="selectNumber" placeholder="model">
+                    <option id="defaultmodel">Odaberi model</option>
+                </select>
+            </div>
 
-router.get("/search",function(req,res){
-  try {
-
-    Cars.find( {$and: [
-              {price: {$lte : req.query.pricee }},
-              {"$or":[
-                { name: null }, { name:'' }, {name:{'$regex':req.query.dsearch, $options: 'i' }}
-              ]},
-              {"$or":[
-              { color: null }, { color:'' }, {color:{'$regex':req.query.color }}
-              ]},
-              {"$or":[
-              { location: null }, { location:'' }, {location:{'$regex':req.query.dlocation, $options: 'i'  }}
-              ]},
-              {"$or":[
-              { yearmanufacture: null }, { yearmanufacture:'' }, {yearmanufacture:{'$regex':req.query.yearmanufacture, $options: 'i'  }}
-              ]},
-              {"$or":[
-              { carbrand: null }, { carbrand:'' }, {carbrand:{'$regex':req.query.carbrand }}
-              ]},
-              {"$or":[
-              { engine: null }, { engine:'' }, {engine:{'$regex':req.query.engine }}
-              ]},
-              {"$or":[
-              {km: {$lte : req.query.km }}
-              ]},
-              {"$or":[
-              { model: null }, { model:'' }, {model:{'$regex':req.query.model }}
-              ]}
-            ]}
-            ,(err,data)=>{
-               if(err){
-                   console.log(err);
-               }else{
-                   res.render('searched',{pginfo:data, curruser:req.user});
-               }
-           })
-  } catch (error) {
-      console.log(error);
-  }
-});
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+   <% } %>
 
 
 
-router.get("/carssale",function(req,res){
 
-    Cars.find({
-    },function(err,pgcars){
-        if(err){
-        console.log("Error: ");
-        console.log(err);
-    }
-    else{
-        res.render("carssale",{pginfo:pgcars, curruser:req.user});
-        //console.log(req.user);
-    }
-    });
+<h4 class="pull-left">Automobili na prodaji:</h4>
+        <div class="row text-right" style=" flex-wrap:wrap;
+        float: left;
+        width:  100%;
+        height: 100%;
+        object-fit: cover;
+        ">
+                 <% pginfo.forEach(function(item){ %>
+<% if(
+(item.status=="prodaja")
+){ %>
+                     <div class="col-md-3 col-sm-6">
+                       <div class="thumbnail">
+                           <a href="/carssale/<%= item._id %>">
+                               <img src="<%= item.image %>">
+                           </a>
+                               <div class="caption">
+                                      <h4> <%= item.name  %> </h4>
+                                 </div>
+                                 <div class="caption" style="display: none;">
+                                        <h4> <%= item.description  %> </h4>
+                                 </div>
+                       </div>
+                     </div>
+                      <% } %>
+                    <% }); %>
+           </div>
 
-});
 
+<% if( (curruser) ){ %>
+           <div class="thumbnail"">
 
+       <script>
+      function httpGet(Url){
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", Url, false);
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+      }
 
-router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
-    cloudinary.uploader.upload(req.file.path, function(result) {
-            var name = req.body.carname;
-            var price = req.body.carprice;
-            var image = result.secure_url;
-            var contact = req.body.carcontact;
-            var description = req.body.descriptionform;
-            var engine = req.body.engine;
-            var km = req.body.km;
-            var yearmanufacture = req.body.yearmanufacture;
-            var carbrand = req.body.carbrand;
-            var location = req.body.location;
-            var color = req.body.color;
-            var model = req.body.model;
-            var owner={
-                id:req.user._id,
-                firstname:req.user.firstname
-            }
-            var newpg = {
-                  name:name,
-                  image:image,
-                  price:price,
-                  contact:contact,
-                  description:description,
-                  engine:engine,
-                  km:km,
-                  yearmanufacture:yearmanufacture,
-                  carbrand:carbrand,
-                  location:location,
-                  color:color,
-                  model:model,
-                  owner:owner
-                }
+      window.onload=function(){
+        var aData = JSON.parse(httpGet('http://localhost:3000/test'));
 
-              Cars.create(newpg, function(err, car) {
-                if (err) {
-                  console.log("ERROR");
-                  return res.redirect('addpg');
-                }
+        var seriesData = {
+          price: [],
+          km: [],
+          yearmanufacture: [],
 
-                req.flash("success","Uspješno ste dodali auto!");
-                res.redirect('/carssale/');
-              });
-        });
-});
+        };
 
-router.get("/carssale/addpg",isLoggedIn,function(req,res){
-  res.render("addpg.ejs");
-});
-
-router.get("/carssale/:id",function(req,res){
-    Cars.findById(req.params.id).populate("comments").exec(function(err,detailcar){
-        if(err){
-            console.log("ERROR: ");
-            console.log(err);
+        for(var n = 0; n < aData.length; n++){
+          seriesData['price'].push(aData[n]['price']);
+          seriesData['km'].push(aData[n]['km']);
+          seriesData['yearmanufacture'].push(aData[n]['yearmanufacture']);
         }
-        else{
-                res.render("acar",{carinfo:detailcar});
-        }
-    });
-});
-
-router.get("/carssale/:id/edit",ownership,function(req,res){
-    Cars.findById(req.params.id,function(err,foundcar){
-        if(err){
-            console.log(err);
-        }
-        else{
-           res.render("edit",{carinfo:foundcar});
-        }
-    });
-
-});
-
-router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res){
-  const carimage = req.file;
-  if (!carimage) {
-                      var data = {
-                          name:req.body.carname,
-                          price:req.body.carprice,
-                          contact:req.body.carcontact,
-                          status:req.body.status,
-                          color:req.body.color,
-                          engine:req.body.engine,
-                          km:req.body.km,
-                          yearmanufacture:req.body.yearmanufacture,
-                          carbrand:req.body.carbrand,
-                          location:req.body.location,
-                          image:"https://res.cloudinary.com/uniquecloudname/image/upload/v1600866328/o9mt88uizdupqrl5swcb.jpg",
-                          description:req.body.descriptionform,
-                          model:req.body.model
-                      }
-                      Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
-                      {
-                       if(err){
-                              res.redirect("/carssale");
-                          }
-                          else{
-                              req.flash("success","Uspješno ste uredili podatke!");
-                             res.redirect("/carssale/"+req.params.id);
-                          }
-                      });
-
-          } else {
-  cloudinary.uploader.upload(req.file.path, function(result) {
-
-            var data = {
-                name:req.body.carname,
-                price:req.body.carprice,
-                contact:req.body.carcontact,
-                status:req.body.status,
-                color:req.body.color,
-                engine:req.body.engine,
-                km:req.body.km,
-                yearmanufacture:req.body.yearmanufacture,
-                carbrand:req.body.carbrand,
-                location:req.body.location,
-                image:result.secure_url,
-                description:req.body.descriptionform,
-                model:req.body.model
-            }
-            Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
-            {
-             if(err){
-                    res.redirect("/carssale");
-                }
-                else{
-                    req.flash("success","Uspješno ste uredili podatke!");
-                   res.redirect("/carssale/"+req.params.id);
-                }
-            });
-});
-}
-});
-
-router.delete("/carssale/:id",ownership,function(req,res){
-
-    Cars.findByIdAndRemove(req.params.id, function(err,car){
-       if(err){
-           res.redirect("/carssale")
-       }
-       else {
-           Comments.deleteMany({_id:{$in:car.comments}}, function(err){
-               if (err) {
-                console.log(err);
-                }
-                else{
-
-                req.flash("success","Uspješno ste izbrisali ovu objavu!");
-               res.redirect("/carssale")
-                }
-
-                });
-
-       }
-    });
-});
 
 
+        zingchart.render({
+          id:"myChart",
+          width:"100%",
+          height:400,
+          data:{
+            "type":"bar",
+     "plotarea":{  "marginLeft":100, "marginRight":100},
 
+     "legend": {
+       "layout": "x3",
+       "overflow": "page",
+       "alpha": 0.05,
+       "shadow": false,
+       "align": "center",
+       "adjust-layout": true,
+       "marker": {
+         "type": "circle",
+         "border-color": "none",
+         "size": "10px"
+       },
+     "border-width": 0,
+     "maxItems": 3,
+     "toggle-action": "hide",
+     "pageOn": {
+     "backgroundColor": "#000",
+     "size": "10px",
+     "alpha": 0.65},
+     "pageOff": {
+     "backgroundColor": "#7E7E7E",
+     "size": "10px",
+     "alpha": 0.65
+     },
+     "pageStatus": {
+     "color": "black"
+     }
+     },
+     //"scroll-y-2": {},
+     "scroll-x": {},
+     "scale-y": {"label": {
+                 "text": "Iznos cijene i prijeđenih kilometara",
+                 "font-family": "arial",
+                 "bold": true,
+                 "font-size": "14px",
+                 "font-color": "#7E7E7E",
+               } //, "zooming": true
+             },
 
-function isLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    req.flash("error","Morate biti prijavljeni!");
-    res.redirect("/signin");
-}
-function ownership(req,res,next){
-    if(req.isAuthenticated()){
-        Cars.findById(req.params.id,function(err,car){
-            if(err){
-                req.flash("error","Nije pronađeno!")
-                res.redirect("back");
-            }
-           else{
-               if((car.owner.id.equals(req.user._id))  || (req.user.role='admin')) {
-               next();
-                }
-                else{
+               'scale-y-2': {
+                 "label": {
+                             "text": "Godina proizvodnje",
+                             "font-family": "arial",
+                             "bold": true,
+                             "font-size": "14px",
+                             "font-color": "#7E7E7E",
+                           }, "zooming": true
+               },
 
-                    req.flash("error","Nemate prava!");
-                    res.redirect("back");
-                }
+                       "scaleX": {"label": {
+                                   "text": "ID oglasa",
+                                   "font-family": "arial",
+                                   "bold": true,
+                                   "font-size": "14px",
+                                   "font-color": "#7E7E7E",
+
+                                 }, "zooming": true, "min-value":1},
+            "series":[
+              {
+                "values":seriesData['price'],
+                "text": 'Cijena (kn)',
+                "scales": "scale-x,scale-y"
+              },
+              {
+                "values":seriesData['km'],
+                "text": 'Prijeđeni kilometri (km)',
+                "scales": "scale-x,scale-y"
+              },
+              {
+                "values":seriesData['yearmanufacture'],
+                "text": 'Godina proizvodnje (godina)',
+                "scales": "scale-x,scale-y-2"
               }
+            ]
+          }
+
         });
-    }
-    else{
-        req.flash("error","Prijavite se!");
-        res.redirect("back");
-    }
-}
+      };
+      </script>
+
+               <h3 style=" margin-top: 100px;">Prikaz odnosa cijene, prijeđenih kilometara i godine proizvodnje automobila prema pojedinom oglasu</h3>
+                   <div id="myChart"></div>
+                   <h3>ID oglasa</h3>
+
+                   <ol>
+                     <% pginfo.forEach(item => { %>
+                     <li><%= `Ime auta: ${item.carbrand} , Cijena auta: ${item.price}, Prijeđeni kilometri: ${item.km}, Godina proizvodnje: ${item.yearmanufacture}
+                       , Vlasnik oglasa: ${item.owner.firstname}, Status: ${item.status}` %></li>
+                     <% }); %>
+                   </ol>
+     </div>
+        </div>
+        <% } %>
 
 
-module.exports=router;
+
+
+
+<% include includes/footer.ejs %>

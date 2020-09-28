@@ -10,6 +10,7 @@ var carsSchema = new mongoose.Schema({
     location:String,
     contact:Number,
     engine:String,
+    model:String,  
     km:Number,
     yearmanufacture: String,
     carbrand:String,
