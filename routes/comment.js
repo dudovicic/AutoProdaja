@@ -3,7 +3,6 @@ var router   = express.Router();
 var Cars   = require("../models/cars");
 var Comments   = require("../models/comments");
 
-
 router.post("/carssale/:id/comment",ownership,function(req,res){
     var commentcomp = {
         text:req.body.text,
@@ -12,8 +11,7 @@ router.post("/carssale/:id/comment",ownership,function(req,res){
             firstname:req.user.firstname
             }
         }
-
-            Comments.create(commentcomp,function(err,comment){
+          Comments.create(commentcomp,function(err,comment){
                 if(err){
                     console.log("error!");
                 }
@@ -50,7 +48,6 @@ router.post("/carssale/:id/comment",ownership,function(req,res){
 
 
 router.delete("/carssale/:id/comment/:comment_id",ownership,function(req,res){
-
 var data = {
     text:req.body.text
 }
@@ -59,7 +56,6 @@ Comments.findByIdAndRemove({_id:req.params.comment_id},data,function(err,updated
         if(err){
             res.redirect("/carssale/"+req.params.id+"/comment/"+req.params.comment_id);
         }else{
-
                 req.flash("success","Uspješno obrisan komentar!");
                res.redirect("/carssale/"+req.params.id);
         }
@@ -88,7 +84,6 @@ function ownership(req,res,next){
         res.redirect("back");
     }
 }
-
 
 
 module.exports = router;

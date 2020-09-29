@@ -1,5 +1,4 @@
 var express = require("express");
-
 var bodyParser = require("body-parser");
 
 var router   = express.Router();
@@ -40,13 +39,10 @@ else{
     res.render("profil",{pginfo:pgcars, curruser:req.user});
 }
 });
-
-
 });
 
 router.get("/search",function(req,res){
   try {
-
     Cars.find( {$and: [
               {price: {$lte : req.query.pricee }},
               {"$or":[
@@ -125,7 +121,6 @@ router.get("/search",function(req,res){
 
 
 router.get("/carssale",function(req,res){
-
     Cars.find({
     },function(err,pgcars){
         if(err){
@@ -134,13 +129,9 @@ router.get("/carssale",function(req,res){
     }
     else{
         res.render("carssale",{pginfo:pgcars, curruser:req.user});
-        //console.log(req.user);
     }
     });
-
 });
-
-
 
 router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
     cloudinary.uploader.upload(req.file.path, function(result) {
@@ -169,7 +160,7 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
             var airbags= req.body.airbags;
             var payment= req.body.payment;
             var owner={
-                id:req.body.req.user._id,
+                id:req.user._id,
                 firstname:req.user.firstname
             }
             var newpg = {
@@ -205,7 +196,6 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
                   console.log("ERROR");
                   return res.redirect('addpg');
                 }
-
                 req.flash("success","Uspješno ste dodali auto!");
                 res.redirect('/carssale/');
               });
@@ -326,7 +316,6 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
 });
 
 router.delete("/carssale/:id",ownership,function(req,res){
-
     Cars.findByIdAndRemove(req.params.id, function(err,car){
        if(err){
            res.redirect("/carssale")
@@ -337,11 +326,9 @@ router.delete("/carssale/:id",ownership,function(req,res){
                 console.log(err);
                 }
                 else{
-
                 req.flash("success","Uspješno ste izbrisali ovu objavu!");
                res.redirect("/carssale")
                 }
-
                 });
 
        }

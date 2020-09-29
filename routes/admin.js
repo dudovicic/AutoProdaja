@@ -29,7 +29,6 @@ cloudinary.config({
 });
 
 
-
 router.get("/admin",isLoggedIn,function(req,res){
 
   var pginfo={};
@@ -52,12 +51,9 @@ router.get("/admin",isLoggedIn,function(req,res){
                res.render("admin",{pginfo:pginfo , users:users});
            }
        });
-
    });
 
-
-   router.delete("/carssale/deleteUser/:id",function(req,res){
-
+router.delete("/carssale/deleteUser/:id",function(req,res){
 
        Users.findByIdAndRemove(req.params.id, function(err,user){
           if(err){
@@ -70,8 +66,7 @@ router.get("/admin",isLoggedIn,function(req,res){
        });
    });
 
-
-   router.get("/carssale/editUser/:id/edit",function(req,res){
+router.get("/carssale/editUser/:id/edit",function(req,res){
        Users.findById(req.params.id,function(err,founduser){
            if(err){
                console.log(err);
@@ -80,7 +75,6 @@ router.get("/admin",isLoggedIn,function(req,res){
               res.render("editUser",{userinfo:founduser});
            }
        });
-
    });
 
 router.use(express.urlencoded({ extended: false }));
@@ -108,7 +102,7 @@ router.use(express.urlencoded({ extended: false }));
                       req.flash("success","Uspješno ste uredili podatke!");
                      res.redirect("/admin/");
                   }
-              });
+          });
    });
 
 
