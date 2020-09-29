@@ -14,6 +14,12 @@
         <div class="row">
           <form class="col-xs-6" action="/search" method="get" >
               <% include includes/carsform.ejs %>
+              <p>Snaga motora (u kW): </p> <input class="form-control mr-sm-2" type="Number" name="enginepowerMin" placeholder="min vrijednost" value=0>
+              <input class="form-control mr-sm-2" type="Number" name="enginepowerMax" placeholder="max vrijednost" value=1000>
+              <p>Maksimalna CO2 emisija (g/km): </p> <input class="form-control mr-sm-2" type="Number" name="co2Min" placeholder="min vrijednost" value=0>
+              <input class="form-control mr-sm-2" type="Number" name="co2Max" placeholder="max vrijednost" value=1000>
+
+              <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
           </form>
         </div>
         <% } %>

@@ -26,6 +26,8 @@ var carsSchema = new mongoose.Schema({
     audio:String,
     airbags:String,
     payment:String,
+    enginepower:Number,
+    cod:Number,
     owner:{
        id:{ type: mongoose.Schema.Types.ObjectId,
         ref:"users"

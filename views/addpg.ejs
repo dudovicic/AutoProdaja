@@ -4,7 +4,9 @@
         <h1 style="text-align:center;">Dodaj oglas auta!</h1>
         <div style="width: 30%; margin:20px auto;">
             <form action="/carssale" method="POST" id="add" enctype="multipart/form-data">
-                <% include includes/carsform.ejs %>                    
+                <% include includes/carsform.ejs %>
+                <p>Snaga motora (u kW): </p> <input class="form-control mr-sm-2" type="Number" name="enginepower" placeholder="snaga motora (u kW)"  max=1000 min=0>
+                <p>Maksimalna CO2 emisija (g/km):</p> <input class="form-control mr-sm-2" type="Number" name="cod" placeholder="maksimalna CO2 emisija (g/km)"  max=1000 min=0>                
             </form>
             <a  href="/carssale">Vrati se nazad</a>
         </div>

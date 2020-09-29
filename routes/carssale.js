@@ -104,6 +104,12 @@ router.get("/search",function(req,res){
               ]},
               {"$or":[
               { payment: null }, { payment:'' }, {payment:{'$regex':req.query.payment, $options: 'i' }}
+              ]},
+              {"$or":[
+              {enginepower : { $gt :  req.query.enginepowerMin, $lt : req.query.enginepowerMax}}
+              ]},
+              {"$or":[
+              {cod : { $gt :  req.query.co2Min, $lt : req.query.co2Max}}
               ]}
             ]}
             ,(err,data)=>{
@@ -159,6 +165,8 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
             var audio= req.body.audio;
             var airbags= req.body.airbags;
             var payment= req.body.payment;
+            var enginepower= req.body.enginepower;
+            var co2= req.body.co2;
             var owner={
                 id:req.user._id,
                 firstname:req.user.firstname
@@ -188,7 +196,9 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
                   numberofowner:numberofowner,
                   audio:audio,
                   airbags:airbags,
-                  payment:payment
+                  payment:payment,
+                  enginepower:enginepower,
+                  co2:co2,
                 }
 
               Cars.create(newpg, function(err, car) {
@@ -258,7 +268,9 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                           numberofowner:req.body.numberofowner,
                           audio:req.body.audio,
                           airbags:req.body.airbags,
-                          payment:req.body.payment
+                          payment:req.body.payment,
+                          enginepower:req.body.enginepower,
+                          co2:req.body.co2,
                       }
                       Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
                       {
@@ -299,7 +311,9 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                 numberofowner:req.body.numberofowner,
                 audio:req.body.audio,
                 airbags:req.body.airbags,
-                payment:req.body.payment
+                payment:req.body.payment,
+                enginepower:req.body.enginepower,
+                co2:req.body.co2,
             }
             Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
             {
