@@ -7,32 +7,26 @@
                 <img class="img-responsive" src="<%= carinfo.image %>">
                 <div class="caption-full" style="padding:19px">
                   <h4 class="pull-right">Cijena: <%= carinfo.price %></h4>
-
-
                     <h4><%= carinfo.name %> objavio/la <a href="">@<%= carinfo.owner.firstname %>  </a> kontakt broj:  <%= carinfo.contact %></h4>
-
-
-                    <div class="pull-right">
-                            <li class="pull-right">Boja: <%= carinfo.color %></li>
-                             <div>
-                            <li class="pull-right" position: relative;>Lokacija: <%= carinfo.location %></li>
-                            </div>
-                            <div>
-                           <li class="pull-right" position: relative;>Brend automobila: <%= carinfo.carbrand %></li>
-                           </div>
-                           <div>
-                          <li class="pull-right" position: relative;>Prijeđeni kilometri: <%= carinfo.km %></li>
-                          </div>
-                          <div>
-                         <li class="pull-right" position: relative;>Motor: <%= carinfo.engine %></li>
-                         </div>
-                         <div>
-                        <li class="pull-right" position: relative;>Godina proizvodnje: <%= carinfo.yearmanufacture %></li>
-                        </div>
-                        <div>
-                       <li class="pull-right" position: relative;>Model: <%= carinfo.model %></li>
-                       </div>
-                    </div>
+                            <li>Boja: <%= carinfo.color %></li>
+                            <li>Lokacija: <%= carinfo.location %></li>
+                           <li>Marka automobila: <%= carinfo.carbrand %></li>
+                          <li>Prijeđeni kilometri: <%= carinfo.km %></li>
+                         <li>Motor: <%= carinfo.engine %></li>
+                        <li>Godina proizvodnje: <%= carinfo.yearmanufacture %></li>
+                       <li>Model: <%= carinfo.model %></li>
+                      <li>Vrsta pogona: <%= carinfo.typeofdrive %></li>
+                     <li>Plin: <%= carinfo.gas %></li>
+                    <li>Klima: <%= carinfo.airconditioning %></li>
+                   <li>Mjenjač: <%= carinfo.gearshift %></li>
+                  <li>Broj brzina: <%= carinfo.numberofgears %></li>
+                 <li>Broj vrata: <%= carinfo.numberofdoors %></li>
+                <li>Broj sjedala: <%= carinfo.numberofseats %></li>
+               <li>Ekološka kategorija vozila: <%= carinfo.ecocategory %></li>
+              <li>Vlasnik: <%= carinfo.numberofowner %></li>
+             <li>Audioradio: <%= carinfo.audio %></li>
+            <li>Zračni jastuci: <%= carinfo.airbags %></li>
+           <li>Način plaćanja: <%= carinfo.payment %></li>
 
                     <p style="word-wrap:break-word;"><%= carinfo.description %> </p>
 

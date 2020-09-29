@@ -11,51 +11,52 @@
   <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 
 
-  <script>
-$(document).ready(function(){
-  $("select#carbrand").change(function(){
-      var options = []
-      var selectedBrand = $(this).children("option:selected").val();
-      //alert("You have selected the country - " + selectedBrand)
-var select = document.getElementById("selectNumber");
+          <script>
+            $(document).ready(function(){
+                $("select#carbrand").change(function(){
+                    var options = []
+                    var selectedBrand = $(this).children("option:selected").val();
+                    //alert("You have selected the country - " + selectedBrand)
+              var select = document.getElementById("selectNumber");
 
-  options = selectedBrand == "audi" ?  ["a1", "a2", "a3", "q2", "Q3", "ostali"]
-         : selectedBrand == "bmw"  ? ["serija 1", "serija 2", "serija 3", "serija 4", "serija 5", "serija 6", "ostali"]
-         : selectedBrand == "ford"  ? ["escort", "explorer", "fiesta", "focus", "mondeo", "ostali"]
-         : selectedBrand == "fiat"  ? ["Bravo", "punto", "linea", "panda", "tipo", "uno", "ostali"]
-         : selectedBrand == "honda"  ? ["accord", "civic", "cr-v", "ostali"]
-         : selectedBrand == "jeep"  ? ["cherokee", "commander", "compass", "grand cherokee", "renegade", "ostali"]
-         : selectedBrand == "kia"  ? ["ceed", "pride", "rio", "shuma", "spectra", "sportage", "ostali"]
-         : selectedBrand == "land rover"  ? ["defender", "discovery", "freelander", "range rover", "ostali"]
-         : selectedBrand == "mazda"  ? ["2", "3", "6", "bt-50", "ostali"]
-         : selectedBrand == "mercedes"  ? ["a-klasa", "b-klasa", "c-klasa", "e-klasa", "serija 100", "ostali"]
-         : selectedBrand == "nissan"  ? ["350z", "juke", "micra", "navara", "qashqai", "ostali"]
-         : selectedBrand == "opel"  ? ["ascona", "astra", "corsa", "insignia", "kadett", "vectra", "ostali"]
-         : selectedBrand == "peugeot"  ? ["206", "207", "306", "406", "ostali"]
-         : selectedBrand == "porche"  ? ["carrera", "cayenne", "cayman", "panamera", "ostali"]
-         : selectedBrand == "seat"  ? ["altea", "cordoba", "ibiza", "leon", "ostali"]
-         : selectedBrand == "skoda"  ? ["fabia", "felicia", "octavia", "superb", "ostali"]
-         : selectedBrand == "volkswagen"  ? ["beetle", "golf I", "golf II", "golf III", "golf IV", "golf V", "ostali"]
-         : selectedBrand == "toyota"  ?  ["auris", "avensis", "corolla", "yaris", "ostali"]
-         : selectedBrand == "volvo"  ? ["s40", "s60", "s90", "v40", "v90", "ostali"]
-         : defaultValue;
+                options = selectedBrand == "audi" ?  ["a1", "a2", "a3", "q2", "Q3", ""]
+                       : selectedBrand == "bmw"  ? ["serija 1", "serija 2", "serija 3", "serija 4", "serija 5", "serija 6", ""]
+                       : selectedBrand == "ford"  ? ["escort", "explorer", "fiesta", "focus", "mondeo", ""]
+                       : selectedBrand == "fiat"  ? ["Bravo", "punto", "linea", "panda", "tipo", "uno", ""]
+                       : selectedBrand == "honda"  ? ["accord", "civic", "cr-v", "ostali"]
+                       : selectedBrand == "jeep"  ? ["cherokee", "commander", "compass", "grand cherokee", "renegade", ""]
+                       : selectedBrand == "kia"  ? ["ceed", "pride", "rio", "shuma", "spectra", "sportage", ""]
+                       : selectedBrand == "land rover"  ? ["defender", "discovery", "freelander", "range rover", ""]
+                       : selectedBrand == "mazda"  ? ["2", "3", "6", "bt-50", ""]
+                       : selectedBrand == "mercedes"  ? ["a-klasa", "b-klasa", "c-klasa", "e-klasa", "serija 100","s","gle coupe", ""]
+                       : selectedBrand == "nissan"  ? ["350z", "juke", "micra", "navara", "qashqai", ""]
+                       : selectedBrand == "opel"  ? ["ascona", "astra", "corsa", "insignia", "kadett", "vectra", ""]
+                       : selectedBrand == "peugeot"  ? ["206", "207", "306", "406", ""]
+                       : selectedBrand == "porche"  ? ["carrera", "cayenne", "cayman", "panamera", ""]
+                       : selectedBrand == "seat"  ? ["altea", "cordoba", "ibiza", "leon", ""]
+                       : selectedBrand == "skoda"  ? ["fabia", "felicia", "octavia", "superb", ""]
+                       : selectedBrand == "volkswagen"  ? ["beetle", "golf I", "golf II", "golf III", "golf IV", "golf V", ""]
+                       : selectedBrand == "toyota"  ?  ["auris", "avensis", "corolla", "yaris", ""]
+                       : selectedBrand == "volvo"  ? ["s40", "s60", "s90", "v40", "v90", ""]
+                       : defaultValue;
 
-  var selectedClassName = "." + selectedBrand;
-  $(select).find("option:not("+selectedClassName+"):not(#defaultmodel)").remove()
+                var selectedClassName = "." + selectedBrand;
+                $(select).find("option:not("+selectedClassName+"):not(#defaultmodel)").remove()
 
-       for(var i = 0; i < options.length; i++) {
-           var  opt = options[i];
-           var el = document.createElement("option");
-           el.textContent = opt;
-           el.value = opt;
-           el.classList.add(selectedBrand);
-           select.appendChild(el);
-       }
+                     for(var i = 0; i < options.length; i++) {
+                         var  opt = options[i];
+                         var el = document.createElement("option");
+                         el.textContent = opt;
+                         el.value = opt;
+                         el.classList.add(selectedBrand);
+                         select.appendChild(el);
+                     }
 
-  });
+                });
 
-});
-</script>
+            });
+          </script>
+
 
 
 

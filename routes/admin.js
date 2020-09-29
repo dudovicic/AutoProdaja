@@ -24,8 +24,8 @@ var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 cloudinary.config({
   cloud_name: 'uniquecloudname',
-  api_key: 'xxx', //upiasti api_key
-  api_secret: 'xxx' //upisati api_secret
+  api_key: 'xxx',
+  api_secret: 'xxx'
 });
 
 

@@ -71,7 +71,43 @@ router.get("/search",function(req,res){
               {km: {$lte : req.query.km }}
               ]},
               {"$or":[
-              { model: null }, { model:'' }, {model:{'$regex':req.query.model }}
+              { model: null }, { model:'' }, {model:{'$regex':req.query.model, $options: 'i' }}
+              ]},
+              {"$or":[
+              { typeofdrive: null }, { typeofdrive:'' }, {typeofdrive:{'$regex':req.query.typeofdrive, $options: 'i' }}
+              ]},
+              {"$or":[
+              { gas: null }, { gas:'' }, {gas:{'$regex':req.query.gas, $options: 'i' }}
+              ]},
+              {"$or":[
+              { airconditioning: null }, { airconditioning:'' }, {airconditioning:{'$regex':req.query.airconditioning, $options: 'i' }}
+              ]},
+              {"$or":[
+              { gearshift: null }, { gearshift:'' }, {gearshift:{'$regex':req.query.gearshift, $options: 'i' }}
+              ]},
+              {"$or":[
+              { numberofgears: null }, { numberofgears:'' }, {numberofgears:{'$regex':req.query.numberofgears, $options: 'i' }}
+              ]},
+              {"$or":[
+              { numberofdoors: null }, { numberofdoors:'' }, {numberofdoors:{'$regex':req.query.numberofdoors, $options: 'i' }}
+              ]},
+              {"$or":[
+              { numberofseats: null }, { numberofseats:'' }, {numberofseats:{'$regex':req.query.numberofseats, $options: 'i' }}
+              ]},
+              {"$or":[
+              { ecocategory: null }, { ecocategory:'' }, {ecocategory:{'$regex':req.query.ecocategory, $options: 'i' }}
+              ]},
+              {"$or":[
+              { numberofowner: null }, { numberofowner:'' }, {numberofowner:{'$regex':req.query.numberofowner, $options: 'i' }}
+              ]},
+              {"$or":[
+              { audio: null }, { audio:'' }, {audio:{'$regex':req.query.audio, $options: 'i' }}
+              ]},
+              {"$or":[
+              { airbags: null }, { airbags:'' }, {airbags:{'$regex':req.query.airbags, $options: 'i' }}
+              ]},
+              {"$or":[
+              { payment: null }, { payment:'' }, {payment:{'$regex':req.query.payment, $options: 'i' }}
               ]}
             ]}
             ,(err,data)=>{
@@ -120,8 +156,20 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
             var location = req.body.location;
             var color = req.body.color;
             var model = req.body.model;
+            var typeofdrive= req.body.typeofdrive;
+            var gas= req.body.gas;
+            var airconditioning= req.body.airconditioning;
+            var gearshift= req.body.gearshift;
+            var numberofgears= req.body.umberofgears;
+            var numberofdoors= req.body.numberofdoors;
+            var numberofseats= req.body.numberofseats;
+            var ecocategory= req.body.ecocategory;
+            var numberofowner= req.body.numberofowner;
+            var audio= req.body.audio;
+            var airbags= req.body.airbags;
+            var payment= req.body.payment;
             var owner={
-                id:req.user._id,
+                id:req.body.req.user._id,
                 firstname:req.user.firstname
             }
             var newpg = {
@@ -137,7 +185,19 @@ router.post("/carssale",isLoggedIn,upload.single('carimage'),function(req,res){
                   location:location,
                   color:color,
                   model:model,
-                  owner:owner
+                  owner:owner,
+                  typeofdrive:typeofdrive,
+                  gas:gas,
+                  airconditioning:airconditioning,
+                  gearshift:gearshift,
+                  numberofgears:numberofgears,
+                  numberofdoors:numberofdoors,
+                  numberofseats:numberofseats,
+                  ecocategory:ecocategory,
+                  numberofowner:numberofowner,
+                  audio:audio,
+                  airbags:airbags,
+                  payment:payment
                 }
 
               Cars.create(newpg, function(err, car) {
@@ -196,7 +256,19 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                           location:req.body.location,
                           image:"https://res.cloudinary.com/uniquecloudname/image/upload/v1600866328/o9mt88uizdupqrl5swcb.jpg",
                           description:req.body.descriptionform,
-                          model:req.body.model
+                          model:req.body.model,
+                          typeofdrive:req.body.typeofdrive,
+                          gas:req.body.gas,
+                          airconditioning:req.body.airconditioning,
+                          gearshift:req.body.gearshift,
+                          numberofgears:req.body.umberofgears,
+                          numberofdoors:req.body.numberofdoors,
+                          numberofseats:req.body.numberofseats,
+                          ecocategory:req.body.ecocategory,
+                          numberofowner:req.body.numberofowner,
+                          audio:req.body.audio,
+                          airbags:req.body.airbags,
+                          payment:req.body.payment
                       }
                       Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
                       {
@@ -225,7 +297,19 @@ router.put("/carssale/:id",ownership,upload.single('carimage'),function(req,res)
                 location:req.body.location,
                 image:result.secure_url,
                 description:req.body.descriptionform,
-                model:req.body.model
+                model:req.body.model,
+                typeofdrive:req.body.typeofdrive,
+                gas:req.body.gas,
+                airconditioning:req.body.airconditioning,
+                gearshift:req.body.gearshift,
+                numberofgears:req.body.umberofgears,
+                numberofdoors:req.body.numberofdoors,
+                numberofseats:req.body.numberofseats,
+                ecocategory:req.body.ecocategory,
+                numberofowner:req.body.numberofowner,
+                audio:req.body.audio,
+                airbags:req.body.airbags,
+                payment:req.body.payment
             }
             Cars.findOneAndUpdate({_id:req.params.id},data,function(err,updated)
             {
