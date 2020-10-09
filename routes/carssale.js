@@ -23,8 +23,9 @@ var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 cloudinary.config({
   cloud_name: 'uniquecloudname',
-  api_key: 'xxx',
-  api_secret: 'xxx'
+  api_key: '383511324771272',
+  api_secret: '4u_Q7k8syTaK8m2JJ73CV5NDU_0'
+
 });
 
 
@@ -44,15 +45,15 @@ else{
 router.get("/search",function(req,res){
   try {
     Cars.find( {$and: [
-              {price: {$lte : req.query.pricee }},
+              {price: {$lte : req.query.carprice }},
               {"$or":[
-                { name: null }, { name:'' }, {name:{'$regex':req.query.dsearch, $options: 'i' }}
+                { name: null }, { name:'' }, {name:{'$regex':req.query.carname, $options: 'i' }}
               ]},
               {"$or":[
               { color: null }, { color:'' }, {color:{'$regex':req.query.color }}
               ]},
               {"$or":[
-              { location: null }, { location:'' }, {location:{'$regex':req.query.dlocation, $options: 'i'  }}
+              { location: null }, { location:'' }, {location:{'$regex':req.query.location, $options: 'i'  }}
               ]},
               {"$or":[
               { yearmanufacture: null }, { yearmanufacture:'' }, {yearmanufacture:{'$regex':req.query.yearmanufacture, $options: 'i'  }}

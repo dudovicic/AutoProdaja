@@ -1,5 +1,6 @@
 <% include includes/headersignup.ejs %>
 
+<% if( curruser.role=="admin" ){ %>
 <div class="container" id="signup">
     <div class="row">
         <h1 style="text-align:center;">Ažuriraj podatke o korisniku:</h1>
@@ -25,6 +26,14 @@
                             <input  class = "form-control" type="text" name="username"  value="<%= userinfo.username %>">
                         </div>
 
+                        <div class="form-group">
+                            <label for="role">Uloga:</label>
+                            <select id="role" name="role">
+                              <option value="basic">basic</option>
+                              <option value="admin">admin</option>
+                            </select>
+                        </div>
+
 
                         <div class="form-group">
                             <button class="btn btn-lg btn-default btn-block">Ažuriraj!</button>
@@ -34,5 +43,5 @@
         </div>
     </div>
 </div>
-
+   <% } %>
 <% include includes/footer.ejs %>

@@ -24,8 +24,8 @@ var upload = multer({ storage: storage, fileFilter: imageFilter})
 
 cloudinary.config({
   cloud_name: 'uniquecloudname',
-  api_key: 'xxx',
-  api_secret: 'xxx'
+  api_key: '383511324771272',
+  api_secret: '4u_Q7k8syTaK8m2JJ73CV5NDU_0'
 });
 
 
@@ -83,7 +83,8 @@ router.use(express.urlencoded({ extended: false }));
                 firstname:req.body.firstname,
                 lastname:req.body.lastname,
                 email:req.body.email,
-                username:req.body.username
+                username:req.body.username,
+                role:req.body.role
               }
               Users.findOneAndUpdate({_id:req.params.id},userdata,function(err,updated)
               {
@@ -92,12 +93,12 @@ router.use(express.urlencoded({ extended: false }));
                       res.redirect("/admin");
                   }
                   else{
-                    console.log(req.body);
+                /*    console.log(req.body);
                     console.log({userdata}); console.log(req.params.id);
                      console.log(req.body.firstname );
                       console.log(req.body.lastname);
-                                            console.log(req.body.email);
-                       console.log(req.body.username );
+                      console.log(req.body.email);
+                       console.log(req.body.username );*/
 
                       req.flash("success","Uspješno ste uredili podatke!");
                      res.redirect("/admin/");

@@ -6,7 +6,21 @@
             <form action="/carssale" method="POST" id="add" enctype="multipart/form-data">
                 <% include includes/carsform.ejs %>
                 <p>Snaga motora (u kW): </p> <input class="form-control mr-sm-2" type="Number" name="enginepower" placeholder="snaga motora (u kW)"  max=1000 min=0>
-                <p>Maksimalna CO2 emisija (g/km):</p> <input class="form-control mr-sm-2" type="Number" name="cod" placeholder="maksimalna CO2 emisija (g/km)"  max=1000 min=0>                
+                <p>Maksimalna CO2 emisija (g/km):</p> <input class="form-control mr-sm-2" type="Number" name="cod" placeholder="maksimalna CO2 emisija (g/km)"  max=1000 min=0>
+                <div class="form-group">
+                <label for="image">Učitaj sliku</label>
+                   <input name="carimage" type="file" id="image" accept="carimage/*" >
+                   <p class="help-block"> format: jpg, png</p>
+               </div>
+                <div class="form-group">
+                <textarea class="form-control" minlength="50" wrap  rows="2" cols="90" type="text" name="descriptionform" placeholder="Opis (min 50 znakova)" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input  class = "form-control" type="number" min="000000000" max="9999999999"  name="carcontact" placeholder="Kontakt telefon">
+                </div>                
+                <div class="form-group">
+                  <button class="btn btn-lg btn-default btn-block">Objavi!</button>
+                </div>
             </form>
             <a  href="/carssale">Vrati se nazad</a>
         </div>
