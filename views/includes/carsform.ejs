@@ -1,0 +1,190 @@
+  <p>Ime automobila: </p> <input class="form-control mr-sm-2" type="text" name="carname" placeholder="Search">
+  <p>Max cijena: <input class="form-control mr-sm-2" type="number" name="carprice" placeholder="price" value=1000000 max=1000000 min=0> </p>
+  <p>Lokacija: </p> <input class="form-control mr-sm-2" type="text" name="location" placeholder="lokacija">
+  <p>Max prijeđeni kilometri: <input class="form-control mr-sm-2" type="number" name="km" placeholder="km" value=1000000 max=1000000 min=0> </p>
+  <p>Godina proizvodnje: <input class="form-control mr-sm-2" type="text" name="yearmanufacture" placeholder="godina proizvodnje, npr 2019" value='' max=2020 min=1900> </p>
+  <div class="form-group">
+      <label for="carbrand">Marka automobila:</label>
+      <select id="carbrand" name="carbrand" >
+        <option value="">sve marke</option>
+        <option value="audi">audi</option>
+        <option value="bmw">bmw</option>
+        <option value="ford">ford</option>
+        <option value="fiat">fiat</option>
+        <option value="honda">honda</option>
+        <option value="jeep">jeep</option>
+        <option value="kia">kia</option>
+        <option value="land rover">land rover</option>
+        <option value="mazda">mazda</option>
+        <option value="mercedes">mercedes</option>
+        <option value="nissan">nissan</option>
+        <option value="opel">opel</option>
+        <option value="peugeot">peugeot</option>
+        <option value="porche">porche</option>
+        <option value="seat">seat</option>
+        <option value="skoda">skoda</option>
+        <option value="toyota">toyota</option>
+        <option value="volkswagen">volkswagen</option>
+        <option value="volvo">volvo</option>
+      </select>
+  </div>
+  <div class="form-group">
+      <select class="form-control" type="text" name="model" id="selectNumber" placeholder="model">
+          <option id="defaultmodel" value="">Odaberi model</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="engine">Motor:</label>
+      <select id="engine" name="engine">
+        <option value="">sve vrste</option>
+        <option value="diesel">diesel</option>
+        <option value="benzin">benzin</option>
+        <option value="hybrid">hybrid</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="color">Boja:</label>
+      <select id="color" name="color">
+        <option value="">sve boje</option>
+        <option value="crvena">crvena</option>
+        <option value="siva">siva</option>
+        <option value="crna">crna</option>
+        <option value="plava">plava</option>
+        <option value="bijela">bijela</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="typeofdrive">Vrsta pogona:</label>
+      <select id="typeofdrive" name="typeofdrive">
+        <option value="">---</option>
+        <option value="prednji">prednji</option>
+        <option value="zadnji">zadnji</option>
+        <option value="4x4">4x4</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="gas">Plin:</label>
+      <select id="gas" name="gas">
+        <option value="">---</option>
+        <option value="da">da</option>
+        <option value="ne">ne</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="airconditioning">Klima:</label>
+      <select id="airconditioning" name="airconditioning">
+        <option value="">---</option>
+        <option value="da">da</option>
+        <option value="ne">ne</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="gearshift">Mjenjač:</label>
+      <select id="gearshift" name="gearshift">
+        <option value="">---</option>
+        <option value="mehanički mjenjač">mehanički mjenjač</option>
+        <option value="Automatski">Automatski</option>
+        <option value="Automatski sekvencijski">Automatski sekvencijski</option>
+        <option value="Sekvencijski mjenjač">Sekvencijski mjenjač</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="numberofgears">Broj brzina:</label>
+      <select id="numberofgears" name="numberofgears">
+        <option value="">---</option>
+        <option value="4 stupnja">4 stupnja</option>
+        <option value="5 stupnjeva">5 stupnjeva</option>
+        <option value="6 stupnjeva">6 stupnjeva</option>
+        <option value="7 stupnjeva">7 stupnjeva</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="numberofdoors">Broj vrata:</label>
+      <select id="numberofdoors" name="numberofdoors">
+        <option value="">---</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="numberofseats">Broj sjedala:</label>
+      <select id="numberofseats" name="numberofseats">
+        <option value="">---</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6+">6+</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="ecocategory">Ekološka kategorija vozila:</label>
+      <select id="ecocategory" name="ecocategory"">
+        <option value="">---</option>
+        <option value="Euro 1">Euro 1</option>
+        <option value="Euro 2">Euro 2</option>
+        <option value="Euro 3">Euro 3</option>
+        <option value="Euro 4">Euro 4</option>
+        <option value="Euro 5">Euro 5</option>
+        <option value="Euro 6">Euro 6</option>
+        <option value="Euro ZX">Euro ZX</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="numberofowner">Vlasnik:</label>
+      <select id="numberofowner" name="numberofowner">
+        <option value="">---</option>
+        <option value="prvi">prvi</option>
+        <option value="drugi">drugi</option>
+        <option value="treći i više">treći i više</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="audio">Audioradio:</label>
+      <select id="audio" name="audio">
+        <option value="">---</option>
+        <option value="autoradio/kasetofon">autoradio/kasetofon</option>
+        <option value="autoradio/CD">autoradio/CD</option>
+        <option value="autoradio/CD/MP3">autoradio/CD/MP3</option>
+        <option value="autoradio/CD/MP3/DVD">autoradio/CD/MP3/DVD</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="airbags">Zračni jastuci:</label>
+      <select id="airbags" name="airbags">
+        <option value="">---</option>
+        <option value="vozački">vozački</option>
+        <option value="vozački + suvozački">vozački + suvozački</option>
+        <option value="vozački + suvozački + bočni">vozački + suvozački + bočni</option>
+      </select>
+  </div>
+
+  <div class="form-group">
+      <label for="payment">Način plaćanja:</label>
+      <select id="payment" name="payment">
+        <option value="">---</option>
+        <option value="gotovina">gotovina</option>
+        <option value="kredit">kredit</option>
+        <option value="leasing">leasing</option>
+        <option value="obročno bankovnim karticama">obročno bankovnim karticama</option>
+        <option value="zamjena">zamjena</option>
+        <option value="staro za novo">staro za novo</option>
+      </select>
+  </div>

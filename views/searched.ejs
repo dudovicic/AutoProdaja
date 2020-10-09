@@ -1,0 +1,49 @@
+<% include includes/header.ejs %>
+<div class="container">
+
+<% if( (!curruser)  || ( curruser && curruser.role=="basic") ){ %>
+        <div class="row"  style="padding-bottom: 15px;">
+          <form class="col-xs-6" action="/search" method="get" >
+            <% include includes/carsform.ejs %>
+            <p>Snaga motora (u kW): </p> <input class="form-control mr-sm-2" type="Number" name="enginepowerMin" placeholder="min vrijednost" value=0>
+            <input class="form-control mr-sm-2" type="Number" name="enginepowerMax" placeholder="max vrijednost" value=1000>
+            <p>Maksimalna CO2 emisija (g/km): </p> <input class="form-control mr-sm-2" type="Number" name="co2Min" placeholder="min vrijednost" value=0>
+            <input class="form-control mr-sm-2" type="Number" name="co2Max" placeholder="max vrijednost" value=1000>
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+   <% } %>
+
+<div class="row text-center" style=" flex-wrap:wrap;
+float: left;
+width:  100%;
+height: 100%;
+padding-top: 15px;
+object-fit: cover;
+background-color: white;
+">
+         <% pginfo.forEach(function(item){ %>
+           <% if(item.status=="prodaja"){ %>
+             <div class="col-md-3 col-sm-6">
+               <div class="thumbnail">
+                   <a href="/carssale/<%= item._id %>">
+                       <img src="<%= item.image %>">
+                   </a>
+                       <div class="caption">
+                              <h4> <%= item.name  %> </h4>
+                         </div>
+                         <div class="caption" style="display: none;">
+                                <h4> <%= item.description  %> </h4>
+                         </div>
+               </div>
+             </div>
+            <% } %>
+          <% }); %>
+   </div>
+</div>
+
+
+
+
+<% include includes/footer.ejs %>
